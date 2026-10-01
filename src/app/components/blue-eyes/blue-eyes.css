@@ -1,0 +1,63 @@
+.blue-eyes-page {
+  display: block;
+  padding: 1.5rem 0 2rem;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  color: #9bdcf2;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+.subtitle {
+  max-width: 540px;
+  margin: 0;
+  color: #d5d2c9;
+  line-height: 1.6;
+}
+
+.blue-eyes-layout {
+  display: block;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.message {
+  background: rgba(21, 27, 31, 0.9);
+  border: 1px solid rgba(155, 220, 242, 0.4);
+  color: #f4ead6;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .blue-eyes-layout {
+    grid-template-columns: 1fr;
+  }
+
+}

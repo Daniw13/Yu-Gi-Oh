@@ -1,0 +1,48 @@
+<div class="card-detail" *ngIf="card; else emptyState">
+  <div class="detail-image-wrap">
+    <img [src]="cardImage" [alt]="card.name" />
+  </div>
+
+  <div class="detail-body">
+    <span class="badge">{{ card.frameType || card.type }}</span>
+    <h2>{{ card.name }}</h2>
+    <p class="meta">
+      {{ card.type }} • {{ card.race || 'Sin raza' }} • {{ card.attribute || 'Sin atributo' }}
+    </p>
+
+    <div class="stats" *ngIf="card.atk !== undefined || card.def !== undefined || card.level !== undefined">
+      <span *ngIf="card.atk !== undefined && card.atk !== null">ATK {{ card.atk }}</span>
+      <span *ngIf="card.def !== undefined && card.def !== null">DEF {{ card.def }}</span>
+      <span *ngIf="card.level !== undefined && card.level !== null">LVL {{ card.level }}</span>
+    </div>
+
+    <p class="description">{{ card.desc }}</p>
+
+    <div class="image-gallery" *ngIf="printVariants && printVariants.length > 1">
+      <h3>Impresiones y presentaciones</h3>
+      <div class="gallery-grid">
+        <div class="print-card" *ngFor="let variant of printVariants">
+          <img [src]="variant.image_url" [alt]="card.name + ' - ' + variant.set_name" />
+          <div class="print-info">
+            <strong>{{ variant.set_name }}</strong>
+            <small>{{ variant.set_rarity || 'Rare' }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sets" *ngIf="printedSets && printedSets.length">
+      <h3>Expansiones e impresiones</h3>
+      <ul>
+        <li *ngFor="let set of printedSets">
+          <span>{{ set.set_name }}</span>
+          <small>{{ set.set_rarity || 'Rare' }}</small>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyState>
+  <div class="empty-state">Selecciona una carta para ver su ficha técnica.</div>
+</ng-template>

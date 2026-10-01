@@ -1,0 +1,67 @@
+<section class="search-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Buscador</p>
+      <h1>busca yu gi´s</h1>
+    </div>
+
+    <form class="search-form" (ngSubmit)="search()">
+      <input
+        type="text"
+        [(ngModel)]="query"
+        name="query"
+        placeholder="Ingrese un nombre"
+        aria-label="Buscar carta"
+        (input)="onInputChange(query)"
+      />
+      <button type="submit">Buscar</button>
+    </form>
+  </header>
+
+  <div *ngIf="errorMessage" class="message error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="loading" class="message">Cargando cartas...</div>
+
+  <p class="results-count" *ngIf="!loading && cards.length">
+    {{ cards.length }} cartas encontradas
+  </p>
+
+  <div class="search-layout" *ngIf="!loading && !errorMessage">
+    <div class="results-panel" *ngIf="cards.length; else emptyState">
+      <app-card
+        *ngFor="let card of cards"
+        [card]="card"
+        (cardSelected)="onSelectCard($event)"
+      ></app-card>
+    </div>
+
+    <ng-template #emptyState>
+      <div class="message">
+        {{ query.trim() ? 'No se encontraron cartas para esa búsqueda.' : 'Ingrese un nombre para buscar cartas.' }}
+      </div>
+    </ng-template>
+
+  </div>
+
+  <div
+    class="card-modal-backdrop"
+    *ngIf="selectedCard"
+    (click)="closeCardDetail()"
+    role="presentation"
+  >
+    <section
+      class="card-modal"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="'Detalles de ' + selectedCard.name"
+      (click)="$event.stopPropagation()"
+    >
+      <button class="card-modal-close" type="button" aria-label="Cerrar detalles" (click)="closeCardDetail()">
+        &times;
+      </button>
+      <app-card-detail [card]="selectedCard"></app-card-detail>
+    </section>
+  </div>
+</section>

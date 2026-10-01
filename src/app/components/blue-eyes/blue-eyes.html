@@ -1,0 +1,48 @@
+<section class="blue-eyes-page">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Arquetipo</p>
+      <h1>Blue-Eyes</h1>
+    </div>
+    <p class="subtitle">
+      Colección especial del icónico arquetipo de dragones con sus cartas y expansiones más relevantes.
+    </p>
+  </header>
+
+  <div *ngIf="loading" class="message">Cargando colección Blue-Eyes...</div>
+
+  <div class="blue-eyes-layout" *ngIf="!loading">
+    <div class="card-grid" *ngIf="cards.length; else emptyState">
+      <app-card
+        *ngFor="let card of cards"
+        [card]="card"
+        (cardSelected)="onSelectCard($event)"
+      ></app-card>
+    </div>
+
+    <ng-template #emptyState>
+      <div class="message">No se encontraron cartas del arquetipo Blue-Eyes.</div>
+    </ng-template>
+
+  </div>
+
+  <div
+    class="card-modal-backdrop"
+    *ngIf="selectedCard"
+    (click)="closeCardDetail()"
+    role="presentation"
+  >
+    <section
+      class="card-modal"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="'Detalles de ' + selectedCard.name"
+      (click)="$event.stopPropagation()"
+    >
+      <button class="card-modal-close" type="button" aria-label="Cerrar detalles" (click)="closeCardDetail()">
+        &times;
+      </button>
+      <app-card-detail [card]="selectedCard"></app-card-detail>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<button class="card-item" type="button" (click)="selectCard()">
+  <img
+    [src]="card.card_images?.[0]?.image_url_small || card.card_images?.[0]?.image_url || card.image_url || 'https://images.ygoprodeck.com/images/cards/89631139.jpg'"
+    [alt]="card.name"
+    loading="lazy"
+  />
+
+  <div class="card-info">
+    <h3>{{ card.name }}</h3>
+    <p class="tag">{{ card.type }}</p>
+    <p><strong>Arquetipo:</strong> {{ card.archetype || 'Sin arquetipo' }}</p>
+    <p><strong>Raza:</strong> {{ card.race || 'N/A' }}</p>
+    <p><strong>Atributo:</strong> {{ card.attribute || 'N/A' }}</p>
+  </div>
+</button>
